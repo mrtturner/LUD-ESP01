@@ -9,7 +9,7 @@ Also needs a settings.json file on device.
     "password": "SSIDPASSWORD"
   },
   "ota": {
-    "gituser": "tghturner",
+    "gituser": "mrtturner",
     "gitrepo": "LUD-ESP01",
     "gitdir": "app",
     "gitfiles": ["main.py","boot.py","config.py","senko.py"]
