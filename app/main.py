@@ -118,13 +118,54 @@ def mainloop():
         if current_effect == 0:
             solid_color(np, (255, 0, 0))  # Example color: Red
         elif current_effect == 1:
-            blink(np, (0, 255, 0), 500)  # Example color: Green
+            solid_color(np, (0, 255, 0))  #
         elif current_effect == 2:
-            fade(np, (0, 0, 255), 10, 50)  # Example color: Blue
+            solid_color(np, (0, 0, 255))  #
         elif current_effect == 3:
-            candle_effect(np, (255, 147, 41), flicker_intensity=30, delay=50)
+            solid_color(np, (255, 255, 0))  #
         elif current_effect == 4:
-            snow_effect(np, [(0, 0, 255), (255, 255, 255)], delay=500)
+            solid_color(np, (0, 255, 255))  #
         elif current_effect == 5:
+            solid_color(np, (255, 0, 255))  #
+        elif current_effect == 6:
+            solid_color(np, (255, 255, 255))  #
+            
+        elif current_effect == 7:
+            blink(np, (255, 0, 0), 500)  # Example color: Red
+        elif current_effect == 8:
+            blink(np, (0, 255, 0), 500)  #
+        elif current_effect == 9:
+            blink(np, (0, 0, 255), 500)  #
+        elif current_effect == 10:
+            blink(np, (255, 255, 0), 500)  #
+        elif current_effect == 11:
+            blink(np, (0, 255, 255), 500)  #
+        elif current_effect == 12:
+            blink(np, (255, 0, 255), 500)  #
+        elif current_effect == 13:
+            blink(np, (255, 255, 255), 500)  #
+        
+        elif current_effect == 14:
+            fade(np, (255, 0, 0), 10, 50)  # Example color: Red
+        elif current_effect == 15:
+            fade(np, (0, 255, 0), 10, 50)  #
+        elif current_effect == 16:
+            fade(np, (0, 0, 255), 10, 50)  #
+        elif current_effect == 17:
+            fade(np, (255, 255, 0), 10, 50)  #
+        elif current_effect == 18:
+            fade(np, (0, 255, 255), 10, 50)  #
+        elif current_effect == 19:
+            fade(np, (255, 0, 255), 10, 50)  #
+        elif current_effect == 20:
+            fade(np, (255, 255, 255), 10, 50)  #
+            
+            
+        elif current_effect == 21:
+            candle_effect(np, (255, 147, 41), flicker_intensity=30, delay=50)
+        elif current_effect == 22:
+            snow_effect(np, [(0, 0, 255), (255, 255, 255)], delay=500)
+        elif current_effect == 23:
             rainbow(np, delay=20)
+
 mainloop()
