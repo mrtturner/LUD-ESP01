@@ -170,7 +170,7 @@ def mainloop():
             
             
         elif current_effect == 21:
-            candle_effect(np, (255, 147, 41), flicker_intensity=30, delay=50)
+            candle_effect(np, (147, 255, 41), flicker_intensity=30, delay=50)
         elif current_effect == 22:
             snow_effect(np, [(0, 0, 255), (255, 255, 255)], delay=500)
         elif current_effect == 23:
