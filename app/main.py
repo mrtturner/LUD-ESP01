@@ -18,39 +18,46 @@ button = machine.Pin(BUTTON_PIN, machine.Pin.IN, machine.Pin.PULL_UP)
 
 # Define effects
 def solid_color(np, color):
-    np[0] = color
+    for i in range(n):
+        np[i] = color
     np.write()
 
 def blink(np, color, delay):
-    np[0] = color
+    for i in range(NUM_PIXELS):
+        np[i] = color
     np.write()
     time.sleep_ms(delay)
-    np[0] = (0, 0, 0)
+    for i in range(NUM_PIXELS):
+        np[i] = (0, 0, 0)
     np.write()
     time.sleep_ms(delay)
 
 def fade(np, color, steps, delay):
-    for i in range(steps):
-        np[0] = (int(color[0]*i/steps), int(color[1]*i/steps), int(color[2]*i/steps))
+    for step in range(steps):
+        for i in range(NUM_PIXELS):
+            np[i] = (int(color[0] * step / steps), int(color[1] * step / steps), int(color[2] * step / steps))
         np.write()
         time.sleep_ms(delay)
-    for i in range(steps, 0, -1):
-        np[0] = (int(color[0]*i/steps), int(color[1]*i/steps), int(color[2]*i/steps))
+    for step in range(steps, 0, -1):
+        for i in range(NUM_PIXELS):
+            np[i] = (int(color[0] * step / steps), int(color[1] * step / steps), int(color[2] * step / steps))
         np.write()
         time.sleep_ms(delay)
 
 def candle_effect(np, base_color, flicker_intensity=30, delay=50):
     r, g, b = base_color
-    flicker_r = urandom.getrandbits(8) % flicker_intensity
-    flicker_g = urandom.getrandbits(8) % flicker_intensity
-    flicker_b = urandom.getrandbits(8) % flicker_intensity
-    np[0] = (max(0, r - flicker_r), max(0, g - flicker_g), max(0, b - flicker_b))
+    for i in range(NUM_PIXELS):
+        flicker_r = urandom.getrandbits(8) % flicker_intensity
+        flicker_g = urandom.getrandbits(8) % flicker_intensity
+        flicker_b = urandom.getrandbits(8) % flicker_intensity
+        np[i] = (max(0, r - flicker_r), max(0, g - flicker_g), max(0, b - flicker_b))
     np.write()
     time.sleep_ms(delay)
 
 def snow_effect(np, colors, delay=500):
-    color = colors[urandom.getrandbits(1)]  # Randomly pick blue or white
-    np[0] = color
+    for i in range(NUM_PIXELS):
+        color = colors[urandom.getrandbits(1)]
+        np[i] = color
     np.write()
     time.sleep_ms(delay)
 
@@ -67,7 +74,8 @@ def wheel(pos):
 
 def rainbow(np, delay=20):
     for j in range(256):
-        np[0] = wheel(j & 255)
+        for i in range(NUM_PIXELS):
+            np[i] = wheel(j & 255)
         np.write()
         time.sleep_ms(delay)
 
