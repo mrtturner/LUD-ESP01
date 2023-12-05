@@ -114,7 +114,7 @@ def button_pressed(pin):
     current_time = time.ticks_ms()
 
     if time.ticks_diff(current_time, last_button_press_time) > debounce_time_ms:
-        current_effect = (current_effect + 1) % 23  # Total number of effects
+        current_effect = (current_effect + 1) % 24  # Total number of effects
         write_effect_to_file(effect_file, current_effect)  # Save the new effect
         last_button_press_time = current_time
 
