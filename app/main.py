@@ -4,7 +4,7 @@ import urandom
 import uos
 
 # Number of LEDs
-n = config.settings.get('numleds', 1)
+n = config.settings.get('numleds', 3)
 
 # Pin where NeoPixels are connected
 pin = config.settings.get('neopixel_pin', 5)
@@ -78,6 +78,27 @@ def rainbow(np, delay=20):
             np[i] = wheel(j & 255)
         np.write()
         time.sleep_ms(delay)
+        
+def disco_effect(np, brightness=100, min_delay=50, max_delay=150):
+    brightness_squared = brightness ** 2  # Pre-calculate the squared brightness for comparison
+    while current_effect == 24:  # Assuming disco effect is effect number 24
+        for i in range(n):
+            # Generate random colors until one meets the brightness requirement
+            while True:
+                r = urandom.getrandbits(8)
+                g = urandom.getrandbits(8)
+                b = urandom.getrandbits(8)
+                
+                # Check if the sum of the squares is close to the desired brightness level
+                if r*r + g*g + b*b <= brightness_squared:
+                    np[i] = (r, g, b)
+                    break
+        
+        np.write()
+        
+        # Random delay for the disco effect to make it more dynamic
+        time.sleep_ms(urandom.randint(min_delay, max_delay))
+
 
 # Function to read the current effect from a file
 def read_effect_from_file(filename):
@@ -114,7 +135,7 @@ def button_pressed(pin):
     current_time = time.ticks_ms()
 
     if time.ticks_diff(current_time, last_button_press_time) > debounce_time_ms:
-        current_effect = (current_effect + 1) % 24  # Total number of effects
+        current_effect = (current_effect + 1) % 25  # Total number of effects
         write_effect_to_file(effect_file, current_effect)  # Save the new effect
         last_button_press_time = current_time
 
@@ -175,5 +196,8 @@ def mainloop():
             snow_effect(np, [(0, 0, 255), (255, 255, 255)], delay=500)
         elif current_effect == 23:
             rainbow(np, delay=20)
+        elif current_effect == 24:
+            disco_effect(np)
+
 
 mainloop()
